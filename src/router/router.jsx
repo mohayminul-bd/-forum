@@ -13,11 +13,13 @@ import PostDetails from "../pages/Home/Home Component/PostDetails";
 import HomeDashboard from "../pages/Dashboard/HomeDashboard";
 import MyProfile from "../pages/Dashboard/MyProfile";
 import Payment from "../pages/MembershipPage/Payment";
+import NotFound from "../pages/notfound/NotFound";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         index: true,

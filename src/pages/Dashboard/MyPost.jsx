@@ -5,27 +5,26 @@ import { useQuery } from "@tanstack/react-query";
 import { FaArrowAltCircleUp, FaArrowCircleDown } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router";
-// import { Link } from "lucide-react";
 
 const MyPost = () => {
-  const { user } = useAuth();
+  const { user } = useAuth(); // Logged-in user
   const axiosSecure = useAxiosSecure();
 
   const {
-    data: posts = [], // default empty array
+    data: posts = [],
     isLoading,
     isError,
     refetch,
   } = useQuery({
     queryKey: ["my-posts", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/posts?authorEmail=${user?.email}`);
+      if (!user?.email) return [];
+      const res = await axiosSecure.get(`/posts?email=${user.email}`);
       return res.data;
     },
-    enabled: !!user?.email, // fetch only when email exists
+    enabled: !!user?.email,
   });
 
-  // 🔥 Delete Handler
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -40,7 +39,7 @@ const MyPost = () => {
         try {
           await axiosSecure.delete(`/posts/${id}`);
           Swal.fire("Deleted!", "Your post has been deleted.", "success");
-          refetch(); // 🔄 reload posts
+          refetch();
         } catch (error) {
           Swal.fire("Error!", "Something went wrong!", error);
         }
@@ -75,17 +74,7 @@ const MyPost = () => {
             <div className="flex-1">
               <p className="font-semibold text-gray-800">{post.authorName}</p>
               <span className="text-gray-400 text-sm">
-                Date:{" "}
-                {new Date(post.createdAt).toLocaleString("en-US", {
-                  weekday: "short",
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  second: "2-digit",
-                  hour12: true,
-                })}
+                Date: {new Date(post.createdAt).toLocaleString()}
               </span>
             </div>
           </div>
@@ -99,7 +88,7 @@ const MyPost = () => {
             </span>
             <NavLink to={`/posts/${post._id}`}>
               <p className="py-2 cursor-pointer text-blue-500 hover:underline">
-                see all
+                See All
               </p>
             </NavLink>
           </div>
