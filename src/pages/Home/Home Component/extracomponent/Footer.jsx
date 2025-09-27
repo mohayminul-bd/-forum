@@ -15,7 +15,9 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Brand / Logo */}
         <div className="flex flex-col items-start">
-          <h1 className="text-2xl font-bold mb-3">MyPlatform</h1>
+          <h1 className="text-2xl font-bold mb-3">
+            MyPlatform <span className="text-green-600 text-3xl">Forum</span>
+          </h1>
           <p className="text-gray-400">
             Providing innovative solutions across Technology, Health, Education,
             and Business sectors.
