@@ -5,7 +5,7 @@ const MembershipPage = () => {
   const navigate = useNavigate();
 
   const handlePay = () => {
-    navigate("/payment"); // যেই route এ PaymentForm আছে
+    navigate("/payment");
   };
 
   return (
