@@ -74,7 +74,7 @@ const PaymentForm = () => {
           email: user.email,
           amount,
           transactionId,
-          paymentMethod: result.paymentIntent.payment_method_types[0], // ✅ শুধু প্রথম method, আর error gone
+          paymentMethod: result.paymentIntent.payment_method_types[0],
           type: "membership",
           date: new Date(),
         };
@@ -114,7 +114,7 @@ const PaymentForm = () => {
           className="btn btn-primary text-black w-full"
           disabled={!stripe || loading}
         >
-          {loading ? "Processing..." : `Pay $${amount}`}
+          {loading ? "Processing...." : `Pay $${amount}`}
         </button>
         {error && <p className="text-red-500">{error}</p>}
       </form>
