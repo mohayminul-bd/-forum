@@ -86,7 +86,7 @@ const PostDetails = () => {
       <div className="flex items-center gap-6 mb-6">
         <button
           onClick={() => handleVote("up")}
-          className="flex items-center gap-2 text-green-600 cursor-pointer hover:scale-110 transition"
+          className="flex items-center gap-3 text-green-600 cursor-pointer hover:scale-110 transition"
         >
           <FaArrowUp /> {post.upVote || 0}
         </button>

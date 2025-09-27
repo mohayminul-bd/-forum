@@ -23,7 +23,7 @@ const PostsList = () => {
   if (isError) {
     console.error(error);
     return (
-      <p className="text-center py-10 text-red-500">Failed to load posts</p>
+      <p className="text-center py-10 text-red-500">Failed to load Posts</p>
     );
   }
 
