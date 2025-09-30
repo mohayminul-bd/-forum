@@ -99,7 +99,8 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="mt-6 text-center text-gray-400 text-sm">
-        © {new Date().getFullYear()} MyPlatform. All rights reserved.
+        © {new Date().getFullYear()} MyPlatform. All rights reserved. developer
+        by mohayminul islam
       </div>
     </footer>
   );
