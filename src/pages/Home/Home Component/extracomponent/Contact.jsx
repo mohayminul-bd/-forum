@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Footer from "./Footer";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -88,6 +89,9 @@ const Contact = () => {
             {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
+      </div>
+      <div className="mt-6">
+        <Footer></Footer>
       </div>
     </section>
   );

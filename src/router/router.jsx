@@ -17,6 +17,7 @@ import NotFound from "../pages/notfound/NotFound";
 import ManageUsers from "../pages/Home/Home Component/extracomponent/ManageUsers";
 import Service from "../pages/Home/Home Component/extracomponent/services";
 import Contact from "../pages/Home/Home Component/extracomponent/Contact";
+import About from "../pages/Home/Home Component/extracomponent/About";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         Component: Contact,
+      },
+      {
+        path: "/about",
+        Component: About,
       },
     ],
   },

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import image1 from "../../../assets/New folder/281281428_513718586877519_3414020004454445116_n.jpg";
-import image2 from "../../../assets/New folder/332362138_766945137758802_7249250261760929092_n.jpg";
-import image3 from "../../../assets/New folder/360126642_784571939792181_4715482852895793888_n.jpg";
 import PostCard from "./PostCard";
 import { NavLink } from "react-router";
 
 const Banner = () => {
-  const images = [image1, image2, image3];
+  const images = [
+    "https://i.ibb.co.com/Qv37xmj4/istockphoto-1987788771-612x612.jpg",
+    "https://i.ibb.co.com/3ykygVhq/one-text-to-many.png",
+    "https://i.ibb.co.com/5xz6xXVx/premium-photo-1661329859712-76d8a4500fdb.jpg",
+  ];
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [searchTag, setSearchTag] = useState("");
   const [tagOptions, setTagOptions] = useState([]);
@@ -62,62 +64,69 @@ const Banner = () => {
     <div>
       {/* Hero Banner */}
       <div
-        className="hero min-h-screen transition-all duration-1000 ease-in-out"
+        className="relative h-[90vh] w-full transition-all duration-1000 ease-in-out"
         style={{
           backgroundImage: `url(${images[currentIndex]})`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "center center",
+          backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="hero-overlay bg-black/50"></div>
-        <div className="hero-content text-neutral-content text-center">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Forum</h1>
-            <p className="mb-5">
-              Browse posts by tags or add your own posts to get started.
-            </p>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
 
-            {/* Search Bar */}
-            <div className="max-w-3xl mx-auto p-6 flex gap-2">
-              <input
-                type="text"
-                placeholder="Search by tag..."
-                value={searchTag}
-                onChange={(e) => setSearchTag(e.target.value)}
-                className="input text-black input-bordered w-full"
-              />
-              <button
-                onClick={() => handleSearch()}
-                className="btn btn-primary px-4"
-              >
-                Search
-              </button>
-            </div>
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-center items-center h-full text-center text-white px-4">
+          <h1 className="mb-5 text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg">
+            Forum message
+          </h1>
+          <p className="mb-5 text-base md:text-lg max-w-xl">
+            Browse posts by tags or add your own posts to get started.
+          </p>
 
-            {/* Tag buttons */}
-            <div className="flex flex-wrap gap-2 justify-center mt-2">
-              {tagOptions.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => {
-                    setSearchTag(tag);
-                    handleSearch(tag);
-                  }}
-                  className="px-3 py-1 bg-blue-950 rounded hover:bg-green-400"
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-
-            <NavLink to="register" className="btn btn-primary p-4 py-5 mt-4">
-              Log in and explore all features <br /> Get Started
-            </NavLink>
+          {/* Search Bar */}
+          <div className="max-w-2xl w-full flex gap-2">
+            <input
+              type="text"
+              placeholder="Search by tag..."
+              value={searchTag}
+              onChange={(e) => setSearchTag(e.target.value)}
+              className="input input-bordered w-full text-black rounded-lg"
+            />
+            <button
+              onClick={() => handleSearch()}
+              className="btn btn-primary px-6 rounded-lg"
+            >
+              Search
+            </button>
           </div>
+
+          {/* Tag buttons */}
+          <div className="flex flex-wrap gap-2 justify-center mt-4">
+            {tagOptions.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => {
+                  setSearchTag(tag);
+                  handleSearch(tag);
+                }}
+                className="px-4 py-2 bg-blue-700 text-white rounded-lg shadow hover:bg-green-500 transition"
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+
+          <NavLink
+            to="register"
+            className="btn btn-secondary px-6 py-3 mt-6 rounded-lg shadow-lg"
+          >
+            Log in and explore all features <br /> Get Started
+          </NavLink>
         </div>
       </div>
 
-      {/* Posts */}
+      {/* Posts Section */}
       <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-6 pb-6 mt-6">
         {loading ? (
           <p className="col-span-full text-center">Loading posts...</p>

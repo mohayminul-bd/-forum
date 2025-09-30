@@ -1,5 +1,6 @@
 import React from "react";
 import { FaBook, FaBriefcase, FaHeartbeat, FaLaptopCode } from "react-icons/fa";
+import Footer from "./Footer";
 
 const services = [
   {
@@ -79,6 +80,9 @@ const Service = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="mt-6">
+        <Footer></Footer>
       </div>
     </section>
   );

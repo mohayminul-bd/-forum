@@ -1,12 +1,52 @@
-# React + Vite
+# Forum Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live site link: https://forum-media-ae2b0.web.app/
 
-Currently, two official plugins are available:
+github clint site link:https://github.com/mohayminul-bd/-forum
+github server site link: https://github.com/mohayminul-bd/-forum-server
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Forum Web Application** is a React-based web app that allows users to read, create, and discuss posts across multiple categories such as Education, Business, Health, and Technology. The project uses Firebase Authentication, React Query, Axios, TailwindCSS, and is deployed on Vercel.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- **User Authentication**
+  - Firebase Email/Password and Google Sign-In
+  - Profile picture and user dashboard
+- **Forum Posts**
+  - Posts organized by category
+  - Tag-based search
+  - Create and edit posts
+- **Services**
+  - Education, Business, Health, Technology
+- **Contact Form**
+  - Users can submit their name, email, and message
+- **Navigation**
+  - Active links are highlighted in light green
+  - Responsive dropdown menu for mobile
+- **Dashboard**
+  - User and post management
+- **Membership**
+  - Paid membership feature
+- **Responsive Design**
+  - Works on both mobile and desktop using TailwindCSS
+
+---
+
+## Tech Stack
+
+- **Frontend:** React, TailwindCSS, React Router, React Query, Axios
+- **Backend:** Node.js, Express.js, MongoDB (API deployed on Vercel)
+- **Authentication:** Firebase
+- **Hosting:** Vercel
+
+---
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone <your-repo-url>
+```

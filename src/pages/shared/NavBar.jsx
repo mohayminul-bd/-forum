@@ -32,23 +32,62 @@ const NavBar = () => {
   const navItem = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
+          }
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/addPost">Add Post</NavLink>
+        <NavLink
+          to="/addPost"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
+          }
+        >
+          Add Post
+        </NavLink>
       </li>
       {user && (
         <>
           <li>
-            <NavLink to="/dashboard/homeDashboard">Dashboard</NavLink>
+            <NavLink
+              to="/dashboard/homeDashboard"
+              className={({ isActive }) =>
+                `px-3 py-1 rounded ${
+                  isActive ? "bg-green-200 text-green-800" : ""
+                }`
+              }
+            >
+              Dashboard
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/membership">MembershipPage</NavLink>
+            <NavLink
+              to="/membership"
+              className={({ isActive }) =>
+                `px-3 py-1 rounded ${
+                  isActive ? "bg-green-200 text-green-800" : ""
+                }`
+              }
+            >
+              MembershipPage
+            </NavLink>
           </li>
         </>
       )}
       <li>
-        <NavLink to="/about">About</NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
+          }
+        >
+          About
+        </NavLink>
       </li>
     </>
   );
@@ -81,8 +120,13 @@ const NavBar = () => {
             {navItem}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl">
-          Forum
+        <Link
+          to="/"
+          className="btn btn-ghost text-xl items-center justify-center"
+        >
+          <span>
+            <span className="text-3xl text-emerald-500">Forum</span>
+          </span>
         </Link>
       </div>
 
