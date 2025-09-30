@@ -23,7 +23,7 @@ const MyProfile = () => {
     const fetchPosts = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/posts?userId=${user.id}&limit=3&sort=desc`
+          `https://fourm-server.vercel.app/posts?userId=${user.id}&limit=3&sort=desc`
         );
         setPosts(res.data);
       } catch (err) {

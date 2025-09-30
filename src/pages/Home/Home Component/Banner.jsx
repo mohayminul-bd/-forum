@@ -26,7 +26,7 @@ const Banner = () => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/posts");
+        const res = await axios.get("https://fourm-server.vercel.app/posts");
         const uniqueTags = [
           ...new Set(res.data.map((post) => post.tag).filter(Boolean)),
         ];
@@ -45,7 +45,9 @@ const Banner = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:5000/posts?tag=${encodeURIComponent(queryTag)}`
+        `https://fourm-server.vercel.app/posts?tag=${encodeURIComponent(
+          queryTag
+        )}`
       );
       setPosts(res.data);
     } catch (err) {

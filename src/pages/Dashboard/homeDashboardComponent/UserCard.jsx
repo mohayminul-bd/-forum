@@ -9,7 +9,7 @@ const BronzeBadge = () => (
 );
 
 const GoldBadge = () => (
-  <div className="flex items-center gap-2 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full font-semibold shadow-md text-sm sm:text-base">
+  <div className="flex items-center gap-2 bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full font-semibold shadow-md text-sm sm:text-base">
     <span className="text-xl">🥇</span> <span>Gold</span>
   </div>
 );

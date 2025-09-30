@@ -20,7 +20,9 @@ const PostDetails = () => {
   } = useQuery({
     queryKey: ["post", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/posts/${id}`);
+      const res = await axios.get(
+        `https://fourm-server.vercel.app/posts/${id}`
+      );
       return res.data;
     },
   });
@@ -28,7 +30,7 @@ const PostDetails = () => {
   // Vote handler
   const handleVote = async (type) => {
     try {
-      await axios.post(`http://localhost:5000/posts/${id}/vote`, {
+      await axios.post(`https://fourm-server.vercel.app/posts/${id}/vote`, {
         userId: user?.email,
         type,
       });
@@ -43,7 +45,7 @@ const PostDetails = () => {
     e.preventDefault();
     if (!commentText.trim()) return;
 
-    await axios.post(`http://localhost:5000/posts/${id}/comments`, {
+    await axios.post(`https://fourm-server.vercel.app/posts/${id}/comments`, {
       userId: user?.email,
       userName: user?.displayName || user?.email?.split("@")[0],
       text: commentText,
@@ -57,7 +59,7 @@ const PostDetails = () => {
   const handleDeleteComment = async (commentId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/posts/${id}/comments/${commentId}`,
+        `https://fourm-server.vercel.app/posts/${id}/comments/${commentId}`,
         { data: { userId: user.email } }
       );
       queryClient.invalidateQueries(["post", id]);

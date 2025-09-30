@@ -15,7 +15,7 @@ const PostsList = () => {
   } = useQuery({
     queryKey: ["all-posts"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/posts");
+      const res = await axios.get("https://fourm-server.vercel.app/posts");
       return res.data;
     },
   });

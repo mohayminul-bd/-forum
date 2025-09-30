@@ -92,10 +92,14 @@ const Register = () => {
             <label className="label">Image</label>
             <input
               type="file"
+              {...register("photoURL", { required: true })}
               onChange={handleImageUpload}
               className="input"
               placeholder="image"
             />
+            {errors.photoURL?.type === "required" && (
+              <p className="text-red-600">Photo is required</p>
+            )}
 
             {/* email */}
             <label className="label">Email</label>
