@@ -25,7 +25,7 @@ const DashboardText = () => {
         </div>
         <ul className="list-disc list-inside space-y-1 text-gray-700">
           <li>Stay consistent with your posts for better visibility.</li>
-          <li>Upgrade to member status to unlock more features.</li>
+          <li>Upgrade to members status to unlock more features.</li>
           <li>Engage with others by commenting and voting.</li>
           <li>
             Consider creating tutorials or guides to help others in the
