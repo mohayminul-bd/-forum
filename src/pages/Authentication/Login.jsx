@@ -10,7 +10,6 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const form = location.state?.from || "/";
-  console.log(location);
 
   const onSubmit = (data) => {
     signIn(data.email, data.password)

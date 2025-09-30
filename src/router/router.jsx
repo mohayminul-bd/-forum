@@ -14,6 +14,9 @@ import HomeDashboard from "../pages/Dashboard/HomeDashboard";
 import MyProfile from "../pages/Dashboard/MyProfile";
 import Payment from "../pages/MembershipPage/Payment";
 import NotFound from "../pages/notfound/NotFound";
+import ManageUsers from "../pages/Home/Home Component/extracomponent/ManageUsers";
+import Service from "../pages/Home/Home Component/extracomponent/services";
+import Contact from "../pages/Home/Home Component/extracomponent/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +37,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/manage-users",
+        element: (
+          <PrivetRouter>
+            <ManageUsers></ManageUsers>
+          </PrivetRouter>
+        ),
+      },
+      {
         path: "payment",
         Component: Payment,
       },
@@ -45,6 +56,14 @@ export const router = createBrowserRouter([
             <PostDetails></PostDetails>
           </PrivetRouter>
         ),
+      },
+      {
+        path: "/services",
+        Component: Service,
+      },
+      {
+        path: "/contact",
+        Component: Contact,
       },
     ],
   },

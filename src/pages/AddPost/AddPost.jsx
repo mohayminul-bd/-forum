@@ -40,8 +40,6 @@ const AddPost = () => {
       createdAt: new Date().toISOString(),
     };
 
-    console.log("Submitting Post Data:", newPost);
-
     try {
       const res = await axios.post("/posts", newPost);
       console.log("Response from server:", res.data);

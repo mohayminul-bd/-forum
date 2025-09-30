@@ -5,7 +5,6 @@ import PaymentForm from "./PaymentForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_payment_key);
 
-console.log(import.meta.env.VITE_payment_Key);
 const Payment = () => {
   return (
     <Elements stripe={stripePromise}>

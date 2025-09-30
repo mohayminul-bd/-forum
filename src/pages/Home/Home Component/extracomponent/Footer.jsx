@@ -8,6 +8,7 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
+import { NavLink } from "react-router";
 
 const Footer = () => {
   return (
@@ -30,6 +31,9 @@ const Footer = () => {
           <a href="/" className="hover:text-indigo-500 transition mb-2">
             Home
           </a>
+          <NavLink to="/manage-users" className=" hover:text-blue-700 mb-2 ">
+            Manage User
+          </NavLink>
           <a href="/about" className="hover:text-indigo-500 transition mb-2">
             About
           </a>

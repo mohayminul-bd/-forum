@@ -20,7 +20,6 @@ const Register = () => {
   const axiosInstance = useAxios();
 
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password)
       .then(async (result) => {
         console.log(result.user);
@@ -58,7 +57,7 @@ const Register = () => {
 
   const handleImageUpload = async (e) => {
     const image = e.target.files[0];
-    console.log(image);
+
     const formData = new FormData();
     formData.append("image", image);
     const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${
