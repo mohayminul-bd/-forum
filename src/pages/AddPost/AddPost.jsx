@@ -3,10 +3,10 @@ import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { useNavigate } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useAuth from "../../hooks/useAuth"; // user আনতে
+import useAuth from "../../hooks/useAuth";
 
 const AddPost = () => {
-  const { user } = useAuth(); // এখন এখান থেকে email আসবে
+  const { user } = useAuth(); // email ashbe
   const navigate = useNavigate();
   const axios = useAxiosSecure();
 
