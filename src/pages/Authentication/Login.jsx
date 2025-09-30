@@ -43,7 +43,7 @@ const Login = () => {
               placeholder="Password"
             />
             <div>
-              <a className="link link-hover">Forgot password?</a>
+              <a className="link link-hover">Forgot Password?</a>
             </div>
             <button className="btn btn-neutral mt-4">Login</button>
           </fieldset>
