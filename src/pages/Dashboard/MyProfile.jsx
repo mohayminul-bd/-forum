@@ -56,9 +56,6 @@ const MyProfile = () => {
 
       {/* Recent Posts */}
       <div>
-        <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-gray-700">
-          Last 3 Posts
-        </h3>
         {posts.length === 0 ? (
           <p className="text-gray-500 text-sm sm:text-base">
             No posts yet. Please create one.
