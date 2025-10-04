@@ -3,21 +3,32 @@ import axios from "axios";
 import { useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
+// import useAuth from "../hooks/useAuth"; // Firebase auth hook
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
 const AdminProfile = () => {
   const [tagName, setTagName] = useState("");
+  const { user } = useAuth(); // Firebase user
 
-  // ✅ Fetch stats
+  // ✅ Fetch stats with token
+  const fetchStats = async () => {
+    if (!user) return null;
+
+    const token = await user.getIdToken(); // get Firebase ID token
+    const res = await axios.get("https://fourm-server.vercel.app/admin/stats", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  };
+
   const { data: stats, isLoading } = useQuery({
     queryKey: ["admin-stats"],
-    queryFn: async () => {
-      const res = await axios.get(
-        "https://fourm-server.vercel.app/admin/stats"
-      );
-      return res.data;
-    },
+    queryFn: fetchStats,
+    enabled: !!user, // only run if user exists
   });
 
   // ✅ Add Tag
@@ -25,23 +36,29 @@ const AdminProfile = () => {
     e.preventDefault();
     if (!tagName) return;
     try {
-      await axios.post("https://fourm-server.vercel.app/tags", {
-        name: tagName,
-      });
+      const token = await user.getIdToken();
+      await axios.post(
+        "https://fourm-server.vercel.app/tags",
+        { name: tagName },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       Swal.fire("Success!", "New Tag Added", "success");
       setTagName("");
     } catch (error) {
-      Swal.fire("Error", "Could not add tag", error);
+      Swal.fire("Error", "Could not add tag", error.message);
     }
   };
 
   if (isLoading) return <p>Loading...</p>;
+  if (!stats) return <p>No data available</p>;
 
   const chartData = [
-    { name: "Posts", value: stats.posts },
-    { name: "Comments", value: stats.comments },
-    { name: "Users", value: stats.users },
+    { name: "Posts", value: stats.posts || 0 },
+    { name: "Comments", value: stats.comments || 0 },
+    { name: "Users", value: stats.users || 0 },
   ];
+
+  const admin = stats.admin || {};
 
   return (
     <div className="p-6 bg-white rounded-xl shadow-md">
@@ -50,15 +67,13 @@ const AdminProfile = () => {
       {/* Admin Info */}
       <div className="flex items-center gap-4 mb-6">
         <img
-          src={
-            stats.admin?.image || "https://via.placeholder.com/80?text=Admin" // fallback image
-          }
-          alt={stats.admin?.name || "Admin"}
+          src={admin.image || "https://via.placeholder.com/80?text=Admin"}
+          alt={admin.name || "Admin"}
           className="w-20 h-20 rounded-full border"
         />
         <div>
-          <h3 className="text-xl font-semibold">{stats.admin?.name}</h3>
-          <p>{stats.admin?.email}</p>
+          <h3 className="text-xl font-semibold">{admin.name || "Admin"}</h3>
+          <p>{admin.email || "admin@example.com"}</p>
         </div>
       </div>
 
