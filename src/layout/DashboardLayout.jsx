@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router";
 import { FaHome, FaPlusCircle, FaUser, FaStickyNote } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
+import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
+import axios from "axios";
 
-const Badge = ({ type }) => {
-  if (type === "gold") {
-    return (
-      <span className="ml-2 bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full text-sm font-semibold">
-        🥇 Gold
-      </span>
-    );
-  } else {
-    return (
-      <span className="ml-2 bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full text-sm font-semibold">
-        🥉 Bronze
-      </span>
-    );
-  }
+const Badge = ({ isMember }) => {
+  const memberStatus = !!isMember; // convert to boolean
+
+  return memberStatus ? (
+    <span className="ml-2 bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full text-sm font-semibold">
+      🥇 Gold
+    </span>
+  ) : (
+    <span className="ml-2 bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full text-sm font-semibold">
+      🥉 Bronze
+    </span>
+  );
 };
 
 const DashboardLayout = () => {
   const { user } = useAuth(); // 🔹 এখানে context থেকে user আনা
+  const [role, setRole] = useState("user");
 
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`https://fourm-server.vercel.app/users/role/${user.email}`)
+        .then((res) => setRole(res.data.role));
+      // .catch(() => setRole("admin"));
+    }
+  }, [user?.email]);
+
+  // console.log(role);
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -105,40 +116,16 @@ const DashboardLayout = () => {
                   <FaUser /> My Profile
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/dashboard/manage-users"
-                  className="flex items-center gap-2 text-lg font-semibold"
-                >
-                  <FaUser /> Manage Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/admin-profile"
-                  className="flex items-center gap-2 text-lg font-semibold"
-                >
-                  <FaUser /> Admin Profile
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/announcement"
-                  className="flex items-center gap-2 text-lg font-semibold"
-                >
-                  <FaUser />
-                  Announcement
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/dashboard/report-comment-admin"
-                  className="flex items-center gap-2 text-lg font-semibold"
-                >
-                  <FaUser />
-                  Report Admin
-                </NavLink>
-              </li>
+
+              {/* {role == "admin" && <AdminDashboard></AdminDashboard>} */}
+
+              {role === "admin" ? (
+                <div>
+                  <AdminDashboard></AdminDashboard>
+                </div>
+              ) : (
+                <div>👤 Normal user dashboard</div>
+              )}
             </div>
 
             {/* User Info at bottom */}

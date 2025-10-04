@@ -1,3 +1,4 @@
+import { FaUser } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router";
 
 const AdminDashboard = () => {
@@ -9,41 +10,40 @@ const AdminDashboard = () => {
         <ul className="space-y-4">
           <li>
             <NavLink
-              to="/admin/manage-users"
-              className={({ isActive }) =>
-                isActive ? "text-yellow-400" : "hover:text-yellow-300"
-              }
+              to="/dashboard/manage-users"
+              className="flex items-center gap-2 text-lg font-semibold"
             >
-              Manage Users
+              <FaUser /> Manage Users
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/admin/reports"
-              className={({ isActive }) =>
-                isActive ? "text-yellow-400" : "hover:text-yellow-300"
-              }
+              to="/dashboard/admin-profile"
+              className="flex items-center gap-2 text-lg font-semibold"
             >
-              Reported Comments
+              <FaUser /> Admin Profile
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/admin/dashboard/announcement"
-              className={({ isActive }) =>
-                isActive ? "text-yellow-400" : "hover:text-yellow-300"
-              }
+              to="/dashboard/announcement"
+              className="flex items-center gap-2 text-lg font-semibold"
             >
-              Make Announcement
+              <FaUser />
+              Announcement
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/report-comment-admin"
+              className="flex items-center gap-2 text-lg font-semibold"
+            >
+              <FaUser />
+              Report Admin
             </NavLink>
           </li>
         </ul>
       </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-6 bg-gray-100">
-        <Outlet />
-      </main>
     </div>
   );
 };
