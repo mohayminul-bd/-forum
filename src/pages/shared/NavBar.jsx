@@ -110,6 +110,26 @@ const NavBar = () => {
           About
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/services"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
+          }
+        >
+          Service
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
+          }
+        >
+          Contact
+        </NavLink>
+      </li>
     </>
   );
 
