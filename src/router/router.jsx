@@ -21,6 +21,7 @@ import ManageUsers from "../pages/AdminDashboard/ManageUsers";
 import AdminProfile from "../pages/AdminDashboard/AdminProfile";
 import MakeAnnouncement from "../pages/AdminDashboard/MakeAnnouncement";
 import HomeAnnouncements from "../pages/Home/Home Component/extracomponent/HomeAnnouncements";
+import ReportedCommentsAdmin from "../pages/AdminDashboard/ReportedCommentsAdmin";
 
 export const router = createBrowserRouter([
   {
@@ -130,6 +131,10 @@ export const router = createBrowserRouter([
       {
         path: "Announcement",
         Component: MakeAnnouncement,
+      },
+      {
+        path: "report-comment-admin",
+        Component: ReportedCommentsAdmin,
       },
     ],
   },

@@ -22,7 +22,10 @@ const GoogleLogin = () => {
           created_at: new Date().toISOString(),
           last_log_in: new Date().toISOString(),
         };
-        const Res = await axiosInstance.post("/users", userInfo);
+        const Res = await axiosInstance.post(
+          "https://fourm-server.vercel.app/users",
+          userInfo
+        );
         console.log(" user update info", Res.data);
         navigate(from);
       })

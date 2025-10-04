@@ -44,7 +44,7 @@ const PostDetails = () => {
     e.preventDefault();
     if (!commentText.trim()) return;
 
-    await axios.post(`/posts/${id}/comments`, {
+    await axios.post(`https://fourm-server.vercel.app/posts/${id}/comments`, {
       userId: user?.email,
       userName: user?.displayName || user?.email?.split("@")[0],
       text: commentText,
@@ -68,9 +68,12 @@ const PostDetails = () => {
 
     if (result.isConfirmed) {
       try {
-        await axios.delete(`/posts/${id}/comments/${commentId}`, {
-          data: { userId: user.email },
-        });
+        await axios.delete(
+          `https://fourm-server.vercel.app/posts/${id}/comments/${commentId}`,
+          {
+            data: { userId: user.email },
+          }
+        );
         queryClient.invalidateQueries(["post", id]);
         Swal.fire("Deleted!", "Your comment has been deleted.", "success");
       } catch (err) {
@@ -85,12 +88,15 @@ const PostDetails = () => {
     if (!feedback) return;
 
     try {
-      await axios.post(`/comments/${commentId}/report`, {
-        feedback,
-        reportedBy: user?.email,
-        postId: id,
-        commentText: post.comments.find((c) => c._id === commentId)?.text,
-      });
+      await axios.post(
+        `https://fourm-server.vercel.app/comments/${commentId}/report`,
+        {
+          feedback,
+          reportedBy: user?.email,
+          postId: id,
+          commentText: post.comments.find((c) => c._id === commentId)?.text,
+        }
+      );
 
       Swal.fire("Reported!", "Comment has been reported.", "success");
       setSelectedFeedback((prev) => ({ ...prev, [commentId]: "" }));

@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import { MdNotifications } from "react-icons/md";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [showBadge, setShowBadge] = useState(true); // Badge দেখানোর state
   const dropdownRef = useRef();
 
   const handleLogOut = async () => {
@@ -28,6 +32,23 @@ const NavBar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // Fetch announcements
+  const { data: announcements } = useQuery({
+    queryKey: ["announcements"],
+    queryFn: async () => {
+      const res = await axios.get(
+        "https://fourm-server.vercel.app/announcements"
+      );
+      return res.data;
+    },
+  });
+
+  const announcementCount = announcements?.length || 0;
+
+  const handleNotificationsClick = () => {
+    setShowBadge(false); // ক্লিক করলে badge disappear হবে
+  };
 
   const navItem = (
     <>
@@ -124,9 +145,7 @@ const NavBar = () => {
           to="/"
           className="btn btn-ghost text-xl items-center justify-center"
         >
-          <span>
-            <span className="text-3xl text-emerald-500">Forum</span>
-          </span>
+          <span className="text-3xl text-emerald-500">Forum</span>
         </Link>
       </div>
 
@@ -135,21 +154,30 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{navItem}</ul>
       </div>
 
-      <div>
-        <NavLink to="/HomeAnnouncements">
-          <h2>announcement</h2>
-        </NavLink>
-      </div>
+      {/* Notification Icon */}
 
       {/* Navbar End */}
       <div className="navbar-end relative" ref={dropdownRef}>
+        <div className="mx-4 md:mr-14 mr-7 relative">
+          <NavLink
+            to="/HomeAnnouncements"
+            className="relative"
+            onClick={handleNotificationsClick}
+          >
+            <MdNotifications className="text-2xl text-gray-700" />
+            {showBadge && announcementCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                {announcementCount}
+              </span>
+            )}
+          </NavLink>
+        </div>
         {!user ? (
           <Link to="/login">
             <span className="btn btn-primary text-black">Log In</span>
           </Link>
         ) : (
           <div className="relative">
-            {/* User Avatar */}
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="btn btn-ghost btn-circle avatar"
@@ -159,7 +187,6 @@ const NavBar = () => {
               </div>
             </button>
 
-            {/* Dropdown */}
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-48 h-32 bg-white border rounded-lg shadow-lg z-50">
                 <Link

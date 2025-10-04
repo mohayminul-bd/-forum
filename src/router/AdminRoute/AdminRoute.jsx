@@ -11,7 +11,9 @@ const AdminRoute = ({ children }) => {
   const { data: isAdmin, isLoading } = useQuery({
     queryKey: ["isAdmin", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users/admin/${user?.email}`);
+      const res = await axiosSecure.get(
+        `https://fourm-server.vercel.app/users/admin/${user?.email}`
+      );
       return res.data?.admin; // backend থেকে true/false আসবে
     },
     enabled: !!user?.email,

@@ -31,7 +31,7 @@ const AddPost = () => {
   const { data: adminTags, isLoading } = useQuery({
     queryKey: ["adminTags"],
     queryFn: async () => {
-      const res = await axios.get("/tags"); // backend থেকে সব tags
+      const res = await axios.get("https://fourm-server.vercel.app/tags"); // backend থেকে সব tags
       return res.data.map((tag) => ({ value: tag.name, label: tag.name }));
     },
   });
@@ -54,7 +54,7 @@ const AddPost = () => {
     };
 
     try {
-      await axios.post("/posts", newPost);
+      await axios.post("https://fourm-server.vercel.app/posts", newPost);
       alert("✅ Post added successfully!");
       reset();
       navigate("/dashboard/myPost");

@@ -8,7 +8,7 @@ const HomeAnnouncements = () => {
 
   useEffect(() => {
     axios
-      .get("/announcements")
+      .get("https://fourm-server.vercel.app/announcements")
       .then((res) => setAnnouncements(res.data))
       .catch((err) => console.error("Error fetching announcements:", err));
   }, [axios]);

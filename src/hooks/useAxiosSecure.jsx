@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import useAuth from "./useAuth";
 const axiosSecure = axios.create({
-  baseURL: `http://localhost:3000`,
+  baseURL: `https://fourm-server.vercel.app/`,
 });
 const useAxiosSecure = () => {
   const { user } = useAuth();

@@ -21,7 +21,7 @@ const MakeAnnouncement = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`/users?email=${user.email}`)
+        .get(`https://fourm-server.vercel.app/users?email=${user.email}`)
         .then((res) => {
           // backend থেকে array return হলে
           const currentUser = res.data.users ? res.data.users[0] : res.data;
@@ -46,7 +46,10 @@ const MakeAnnouncement = () => {
         createdAt: new Date().toISOString(),
       };
 
-      await axios.post("/announcements", announcement);
+      await axios.post(
+        "https://fourm-server.vercel.app/announcements",
+        announcement
+      );
 
       Swal.fire({
         icon: "success",

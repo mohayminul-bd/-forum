@@ -19,7 +19,9 @@ const MyPost = () => {
     queryKey: ["my-posts", user?.email],
     queryFn: async () => {
       if (!user?.email) return [];
-      const res = await axiosSecure.get(`/posts?email=${user.email}`);
+      const res = await axiosSecure.get(
+        `https://fourm-server.vercel.app/posts?email=${user.email}`
+      );
       return res.data;
     },
     enabled: !!user?.email,
@@ -37,7 +39,9 @@ const MyPost = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axiosSecure.delete(`/posts/${id}`);
+          await axiosSecure.delete(
+            `https://fourm-server.vercel.app/posts/${id}`
+          );
           Swal.fire("Deleted!", "Your post has been deleted.", "success");
           refetch();
         } catch (error) {

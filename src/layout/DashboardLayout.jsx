@@ -130,6 +130,15 @@ const DashboardLayout = () => {
                   Announcement
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/dashboard/report-comment-admin"
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  <FaUser />
+                  Report Admin
+                </NavLink>
+              </li>
             </div>
 
             {/* User Info at bottom */}

@@ -33,7 +33,10 @@ const Register = () => {
           last_log_in: new Date().toISOString(),
         };
 
-        const userRes = await axiosInstance.post("/users", userInfo);
+        const userRes = await axiosInstance.post(
+          "https://fourm-server.vercel.app/users",
+          userInfo
+        );
         console.log(userRes.data);
 
         // update user profile in firebase

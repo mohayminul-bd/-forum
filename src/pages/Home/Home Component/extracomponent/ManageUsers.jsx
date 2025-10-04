@@ -11,7 +11,9 @@ const ManageUsers = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["users", page],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users?page=${page}&limit=${limit}`);
+      const res = await axiosSecure.get(
+        `https://fourm-server.vercel.app/users?page=${page}&limit=${limit}`
+      );
       return res.data; // should return { users: [], totalPages: number }
     },
     keepPreviousData: true,
