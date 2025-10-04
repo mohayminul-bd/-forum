@@ -4,6 +4,8 @@ Live site link: https://forum-media-ae2b0.web.app/
 
 github clint site link:https://github.com/mohayminul-bd/-forum
 github server site link: https://github.com/mohayminul-bd/-forum-server
+Admin email: sourav024@gmail.com
+Admin password: 123456
 
 **Forum Web Application** is a React-based web app that allows users to read, create, and discuss posts across multiple categories such as Education, Business, Health, and Technology. The project uses Firebase Authentication, React Query, Axios, TailwindCSS, and is deployed on Vercel.
 
