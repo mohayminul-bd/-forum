@@ -50,8 +50,10 @@ const AdminProfile = () => {
       {/* Admin Info */}
       <div className="flex items-center gap-4 mb-6">
         <img
-          src={stats.admin?.image || "https://via.placeholder.com/80"}
-          alt="Admin"
+          src={
+            stats.admin?.image || "https://via.placeholder.com/80?text=Admin" // fallback image
+          }
+          alt={stats.admin?.name || "Admin"}
           className="w-20 h-20 rounded-full border"
         />
         <div>
