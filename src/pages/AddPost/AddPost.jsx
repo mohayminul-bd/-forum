@@ -2,30 +2,43 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { useNavigate } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 
 const AddPost = () => {
-  const { user } = useAuth(); // email ashbe
+  const { user } = useAuth();
   const navigate = useNavigate();
   const axios = useAxiosSecure();
 
   const {
     register,
     handleSubmit,
-    reset,
     control,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const tagOptions = [
+  // ✅ Hardcoded default tags
+  const defaultTags = [
     { value: "Technology", label: "Technology" },
     { value: "Education", label: "Education" },
     { value: "Health", label: "Health" },
     { value: "Business", label: "Business" },
   ];
 
-  // ফর্ম সাবমিট হ্যান্ডলার
+  // ✅ Fetch admin-added tags from backend
+  const { data: adminTags, isLoading } = useQuery({
+    queryKey: ["adminTags"],
+    queryFn: async () => {
+      const res = await axios.get("/tags"); // backend থেকে সব tags
+      return res.data.map((tag) => ({ value: tag.name, label: tag.name }));
+    },
+  });
+
+  // Combine default + admin-added tags
+  const tagOptions = [...defaultTags, ...(adminTags || [])];
+
   const onSubmit = async (formData) => {
     const newPost = {
       authorImage: user?.photoURL || "https://i.ibb.co/YWQ0mnc/avatar.png",
@@ -41,14 +54,13 @@ const AddPost = () => {
     };
 
     try {
-      const res = await axios.post("/posts", newPost);
-      console.log("Response from server:", res.data);
+      await axios.post("/posts", newPost);
       alert("✅ Post added successfully!");
       reset();
       navigate("/dashboard/myPost");
     } catch (err) {
-      console.error("Error saving post:", err);
-      alert("❌ Something went wrong");
+      console.error(err);
+      alert("❌ Something went wrong!");
     }
   };
 
@@ -115,7 +127,8 @@ const AddPost = () => {
               <Select
                 {...field}
                 options={tagOptions}
-                placeholder="Select a tag"
+                placeholder={isLoading ? "Loading tags..." : "Select a tag"}
+                isLoading={isLoading}
               />
             )}
           />

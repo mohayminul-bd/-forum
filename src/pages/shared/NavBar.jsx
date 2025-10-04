@@ -135,6 +135,12 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{navItem}</ul>
       </div>
 
+      <div>
+        <NavLink to="/HomeAnnouncements">
+          <h2>announcement</h2>
+        </NavLink>
+      </div>
+
       {/* Navbar End */}
       <div className="navbar-end relative" ref={dropdownRef}>
         {!user ? (

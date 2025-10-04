@@ -14,10 +14,13 @@ import HomeDashboard from "../pages/Dashboard/HomeDashboard";
 import MyProfile from "../pages/Dashboard/MyProfile";
 import Payment from "../pages/MembershipPage/Payment";
 import NotFound from "../pages/notfound/NotFound";
-import ManageUsers from "../pages/Home/Home Component/extracomponent/ManageUsers";
 import Service from "../pages/Home/Home Component/extracomponent/services";
 import Contact from "../pages/Home/Home Component/extracomponent/Contact";
 import About from "../pages/Home/Home Component/extracomponent/About";
+import ManageUsers from "../pages/AdminDashboard/ManageUsers";
+import AdminProfile from "../pages/AdminDashboard/AdminProfile";
+import MakeAnnouncement from "../pages/AdminDashboard/MakeAnnouncement";
+import HomeAnnouncements from "../pages/Home/Home Component/extracomponent/HomeAnnouncements";
 
 export const router = createBrowserRouter([
   {
@@ -37,14 +40,7 @@ export const router = createBrowserRouter([
           </PrivetRouter>
         ),
       },
-      {
-        path: "/manage-users",
-        element: (
-          <PrivetRouter>
-            <ManageUsers></ManageUsers>
-          </PrivetRouter>
-        ),
-      },
+
       {
         path: "payment",
         Component: Payment,
@@ -69,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         Component: About,
+      },
+      {
+        path: "/HomeAnnouncements",
+        Component: HomeAnnouncements,
       },
     ],
   },
@@ -118,6 +118,18 @@ export const router = createBrowserRouter([
       {
         path: "myProfile",
         Component: MyProfile,
+      },
+      {
+        path: "Manage-users",
+        Component: ManageUsers,
+      },
+      {
+        path: "admin-profile",
+        Component: AdminProfile,
+      },
+      {
+        path: "Announcement",
+        Component: MakeAnnouncement,
       },
     ],
   },

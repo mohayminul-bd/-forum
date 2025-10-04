@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink, Outlet } from "react-router";
 import { FaHome, FaPlusCircle, FaUser, FaStickyNote } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
-// import useAuth from "../../hooks/useAuth"; // 🔹 useAuth hook
 
 const Badge = ({ type }) => {
   if (type === "gold") {
@@ -104,6 +103,31 @@ const DashboardLayout = () => {
                   className="flex items-center gap-2 text-lg font-semibold"
                 >
                   <FaUser /> My Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manage-users"
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  <FaUser /> Manage Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/admin-profile"
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  <FaUser /> Admin Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/announcement"
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  <FaUser />
+                  Announcement
                 </NavLink>
               </li>
             </div>
