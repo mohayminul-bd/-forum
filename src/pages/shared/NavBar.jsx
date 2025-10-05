@@ -8,7 +8,8 @@ import axios from "axios";
 const NavBar = () => {
   const { user, logOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [showBadge, setShowBadge] = useState(true); // Badge দেখানোর state
+  const [showBadge, setShowBadge] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false); // mobile side menu state
   const dropdownRef = useRef();
 
   const handleLogOut = async () => {
@@ -47,27 +48,26 @@ const NavBar = () => {
   const announcementCount = announcements?.length || 0;
 
   const handleNotificationsClick = () => {
-    setShowBadge(false); // ক্লিক করলে badge disappear হবে
+    setShowBadge(false);
+  };
+
+  // ✅ Close menu when clicking nav item
+  const handleNavClick = () => {
+    setMenuOpen(false);
   };
 
   const navItem = (
     <>
       <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
-          }
-        >
+        <NavLink to="/" onClick={handleNavClick} className="px-3 py-1 rounded">
           Home
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/addPost"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
-          }
+          onClick={handleNavClick}
+          className="px-3 py-1 rounded"
         >
           Add Post
         </NavLink>
@@ -77,11 +77,8 @@ const NavBar = () => {
           <li>
             <NavLink
               to="/dashboard/homeDashboard"
-              className={({ isActive }) =>
-                `px-3 py-1 rounded ${
-                  isActive ? "bg-green-200 text-green-800" : ""
-                }`
-              }
+              onClick={handleNavClick}
+              className="px-3 py-1 rounded"
             >
               Dashboard
             </NavLink>
@@ -89,13 +86,10 @@ const NavBar = () => {
           <li>
             <NavLink
               to="/membership"
-              className={({ isActive }) =>
-                `px-3 py-1 rounded ${
-                  isActive ? "bg-green-200 text-green-800" : ""
-                }`
-              }
+              onClick={handleNavClick}
+              className="px-3 py-1 rounded"
             >
-              MembershipPage
+              Membership
             </NavLink>
           </li>
         </>
@@ -103,9 +97,8 @@ const NavBar = () => {
       <li>
         <NavLink
           to="/about"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
-          }
+          onClick={handleNavClick}
+          className="px-3 py-1 rounded"
         >
           About
         </NavLink>
@@ -113,9 +106,8 @@ const NavBar = () => {
       <li>
         <NavLink
           to="/services"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
-          }
+          onClick={handleNavClick}
+          className="px-3 py-1 rounded"
         >
           Service
         </NavLink>
@@ -123,9 +115,8 @@ const NavBar = () => {
       <li>
         <NavLink
           to="/contact"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded ${isActive ? "bg-green-200 text-green-800" : ""}`
-          }
+          onClick={handleNavClick}
+          className="px-3 py-1 rounded"
         >
           Contact
         </NavLink>
@@ -134,33 +125,22 @@ const NavBar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 px-7 shadow-sm">
+    <div
+      className="navbar bg-base-100 px-7 shadow-sm 
+      fixed top-0 left-0 right-0 z-40 lg:static"
+    >
       {/* Navbar Start */}
       <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+        {/* Hamburger button */}
+        <div className="lg:hidden">
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="btn btn-ghost text-2xl"
           >
-            {navItem}
-          </ul>
+            ☰
+          </button>
         </div>
+
         <Link
           to="/"
           className="btn btn-ghost text-xl items-center justify-center"
@@ -169,12 +149,10 @@ const NavBar = () => {
         </Link>
       </div>
 
-      {/* Navbar Center */}
+      {/* Navbar Center (desktop menu) */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navItem}</ul>
       </div>
-
-      {/* Notification Icon */}
 
       {/* Navbar End */}
       <div className="navbar-end relative" ref={dropdownRef}>
@@ -203,7 +181,10 @@ const NavBar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img src={user.photoURL || "/default-profile.png"} alt="user" />
+                <img
+                  src={user?.photoURL || "/default-profile.png"}
+                  alt="user"
+                />
               </div>
             </button>
 
@@ -228,6 +209,28 @@ const NavBar = () => {
           </div>
         )}
       </div>
+
+      {/* Mobile Side Menu */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 flex">
+          {/* Overlay */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-40"
+            onClick={() => setMenuOpen(false)}
+          ></div>
+
+          {/* Sidebar */}
+          <div className="relative bg-white w-[70%] h-full shadow-lg p-5">
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="absolute top-3 right-3 text-2xl"
+            >
+              ✕
+            </button>
+            <ul className="menu space-y-4 mt-10">{navItem}</ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

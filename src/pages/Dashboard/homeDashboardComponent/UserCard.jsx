@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
+import axios from "axios";
 
 // Badge components
 const BronzeBadge = () => (
@@ -16,6 +17,24 @@ const GoldBadge = () => (
 
 const UserCard = () => {
   const { user } = useAuth();
+  const [profile, setProfile] = useState(null);
+
+  // ✅ Get user info from DB
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(
+          `https://fourm-server.vercel.app/users/role/${user.email}`
+        );
+
+        setProfile(res.data);
+      } catch (error) {
+        console.error("Failed to fetch user profile:", error);
+      }
+    };
+
+    if (user?.email) fetchProfile();
+  }, [user?.email]);
 
   return (
     <div className="p-4 sm:p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
@@ -33,7 +52,7 @@ const UserCard = () => {
           <p className="text-gray-600 text-sm sm:text-base">{user.email}</p>
 
           <div className="mt-2 sm:mt-3 flex justify-center sm:justify-start space-x-3">
-            {user.isMember ? <GoldBadge /> : <BronzeBadge />}
+            {profile?.isMember ? <GoldBadge /> : <BronzeBadge />}
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
-import { Link, useNavigate } from "react-router"; // useNavigate যোগ করো
+import { Link, NavLink, useNavigate } from "react-router"; // useNavigate যোগ করো
 import GoogleLogin from "./GoogleLogin";
 import axios from "axios";
 import useAxios from "../../hooks/useAxios";
@@ -140,6 +140,18 @@ const Register = () => {
           </Link>
         </p>
         <GoogleLogin />
+        <NavLink className="ml-11 md:ml-25" to="/">
+          <button className="btn  text-black bg-blue-400 border-[#e5e5e5]">
+            <svg
+              aria-label="Google logo"
+              width="16"
+              height="16"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            ></svg>
+            Back to Home
+          </button>
+        </NavLink>
       </div>
     </div>
   );

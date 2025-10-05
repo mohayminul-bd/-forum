@@ -6,7 +6,7 @@ const axiosSecure = axios.create({
 });
 const useAxiosSecure = () => {
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
 
   axiosSecure.interceptors.request.use(
     (config) => {

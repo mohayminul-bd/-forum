@@ -16,14 +16,33 @@ const GoldBadge = () => (
 );
 
 const MyProfile = () => {
-  const { user } = useAuth(); // user: { id, displayName, email, photoURL, isMember }
+  const { user } = useAuth(); // firebase user
+  const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState([]);
 
+  // ✅ Get user info from DB
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(
+          `https://fourm-server.vercel.app/users/role/${user.email}`
+        );
+
+        setProfile(res.data);
+      } catch (error) {
+        console.error("Failed to fetch user profile:", error);
+      }
+    };
+
+    if (user?.email) fetchProfile();
+  }, [user?.email]);
+
+  // ✅ Get posts by this user
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const res = await axios.get(
-          `https://fourm-server.vercel.app/posts?userId=${user.id}&limit=3&sort=desc`
+          `http://localhost:3000/posts?email=${user.email}&limit=3&sort=desc`
         );
         setPosts(res.data);
       } catch (err) {
@@ -31,8 +50,10 @@ const MyProfile = () => {
       }
     };
 
-    fetchPosts();
-  }, [user.id]);
+    if (user?.email) fetchPosts();
+  }, [user?.email]);
+
+  if (!profile) return <p>Loading...</p>;
 
   return (
     <div className="p-4 sm:p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
@@ -48,8 +69,10 @@ const MyProfile = () => {
             {user.displayName}
           </h2>
           <p className="text-gray-600 text-sm sm:text-base">{user.email}</p>
+
+          {/* ✅ Badge based on isMember */}
           <div className="mt-2 sm:mt-3 flex justify-center sm:justify-start space-x-3">
-            {user.isMember ? <GoldBadge /> : <BronzeBadge />}
+            {profile.isMember ? <GoldBadge /> : <BronzeBadge />}
           </div>
         </div>
       </div>

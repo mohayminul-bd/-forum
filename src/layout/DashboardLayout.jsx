@@ -5,24 +5,23 @@ import useAuth from "../hooks/useAuth";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import axios from "axios";
 
-const Badge = ({ isMember }) => {
-  const memberStatus = !!isMember; // convert to boolean
+// Badge components
+const BronzeBadge = () => (
+  <div className="flex items-center gap-2 bg-orange-100 text-orange-700 px-3 py-1 rounded-full font-semibold shadow-sm text-sm sm:text-base">
+    <span className="text-xl">🥉</span> <span>Bronze</span>
+  </div>
+);
 
-  return memberStatus ? (
-    <span className="ml-2 bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full text-sm font-semibold">
-      🥇 Gold
-    </span>
-  ) : (
-    <span className="ml-2 bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full text-sm font-semibold">
-      🥉 Bronze
-    </span>
-  );
-};
+const GoldBadge = () => (
+  <div className="flex items-center gap-2 bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full font-semibold shadow-md text-sm sm:text-base">
+    <span className="text-xl">🥇</span> <span>Gold</span>
+  </div>
+);
 
 const DashboardLayout = () => {
   const { user } = useAuth(); // 🔹 এখানে context থেকে user আনা
   const [role, setRole] = useState("user");
-
+  const [profile, setProfile] = useState(null);
   useEffect(() => {
     if (user?.email) {
       axios
@@ -30,6 +29,23 @@ const DashboardLayout = () => {
         .then((res) => setRole(res.data.role));
       // .catch(() => setRole("admin"));
     }
+  }, [user?.email]);
+
+  // ✅ Get user info from DB
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(
+          `https://fourm-server.vercel.app/users/role/${user.email}`
+        );
+
+        setProfile(res.data);
+      } catch (error) {
+        console.error("Failed to fetch user profile:", error);
+      }
+    };
+
+    if (user?.email) fetchProfile();
   }, [user?.email]);
 
   // console.log(role);
@@ -142,7 +158,7 @@ const DashboardLayout = () => {
                 <p className="text-gray-500 text-sm">
                   {user.email || "No email"}
                 </p>
-                <Badge type={user.isMember ? "gold" : "bronze"} />
+                {profile?.isMember ? <GoldBadge /> : <BronzeBadge />}
               </div>
             )}
           </ul>

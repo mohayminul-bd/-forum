@@ -54,6 +54,19 @@ const Login = () => {
           </Link>
         </p>
         <GoogleLogin></GoogleLogin>
+
+        <NavLink className="ml-11 md:ml-25" to="/">
+          <button className="btn  text-black bg-blue-400 border-[#e5e5e5]">
+            <svg
+              aria-label="Google logo"
+              width="16"
+              height="16"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            ></svg>
+            Back to Home
+          </button>
+        </NavLink>
       </div>
     </div>
   );
