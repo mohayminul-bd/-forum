@@ -14,6 +14,7 @@ import { auth } from "../firebase/firebase.init";
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
+  const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -51,6 +52,14 @@ const AuthProvider = ({ children }) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }, [darkMode]);
+
   const authInfo = {
     user,
     loading,
@@ -59,6 +68,8 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     updateUserProfile,
     logOut,
+    darkMode,
+    setDarkMode,
   };
 
   return <AuthContext value={authInfo}>{children}</AuthContext>;

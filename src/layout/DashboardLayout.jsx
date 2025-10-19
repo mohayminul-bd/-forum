@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router";
 import { FaHome, FaPlusCircle, FaUser, FaStickyNote } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 // Badge components
 const BronzeBadge = () => (
@@ -19,6 +20,7 @@ const GoldBadge = () => (
 );
 
 const DashboardLayout = () => {
+  const { darkMode } = useContext(AuthContext);
   const { user } = useAuth(); // 🔹 এখানে context থেকে user আনা
   const [role, setRole] = useState("user");
   const [profile, setProfile] = useState(null);
@@ -51,11 +53,17 @@ const DashboardLayout = () => {
   // console.log(role);
   return (
     <div>
-      <div className="drawer lg:drawer-open">
+      <div
+        className={`drawer lg:drawer-open ${
+          darkMode
+            ? "bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg text-white"
+            : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+        }`}
+      >
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
-          <div className="navbar bg-base-300 w-full">
-            <div className="flex-none lg:hidden">
+          <div className="navbar bg-gradient-to-r md:hidden from-emerald-600 to-teal-700 text-whi w-full">
+            <div className="flex-none  lg:hidden">
               <label
                 htmlFor="my-drawer-2"
                 aria-label="open sidebar"
@@ -76,7 +84,6 @@ const DashboardLayout = () => {
                 </svg>
               </label>
             </div>
-            <div className="flex-1 px-2 text-xl font-bold">Dashboard</div>
           </div>
 
           <div className="p-6 w-full lg:w-3/4 mx-auto">

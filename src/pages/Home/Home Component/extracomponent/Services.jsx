@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaBook, FaBriefcase, FaHeartbeat, FaLaptopCode } from "react-icons/fa";
 import Footer from "./Footer";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const services = [
   {
@@ -58,13 +59,21 @@ const services = [
 ];
 
 const Service = () => {
+  const { darkMode } = useContext(AuthContext);
   return (
-    <section className="py-16 bg-gray-50">
+    <section
+      className={`pt-7 ${
+        darkMode
+          ? "bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg text-white"
+          : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-10">Our Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, idx) => (
             <div
+              data-aos="zoom-in-up"
               key={idx}
               className="bg-white p-6 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-2"
             >

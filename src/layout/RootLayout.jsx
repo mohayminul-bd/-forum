@@ -11,7 +11,7 @@ const RootLayout = () => {
   return (
     <div>
       <NavBar></NavBar>
-      <div className="py-7">
+      <div className="md:pt-17 pt-15">
         <Outlet></Outlet>
       </div>
     </div>

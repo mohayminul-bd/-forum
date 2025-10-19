@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import { MdNotifications } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
 
 const NavBar = () => {
+  const { darkMode, setDarkMode } = useContext(AuthContext);
   const { user, logOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showBadge, setShowBadge] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false); // mobile side menu state
+  const [menuOpen, setMenuOpen] = useState(false);
   const dropdownRef = useRef();
 
   const handleLogOut = async () => {
@@ -21,7 +23,6 @@ const NavBar = () => {
     }
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -34,7 +35,6 @@ const NavBar = () => {
     };
   }, []);
 
-  // Fetch announcements
   const { data: announcements } = useQuery({
     queryKey: ["announcements"],
     queryFn: async () => {
@@ -46,20 +46,27 @@ const NavBar = () => {
   });
 
   const announcementCount = announcements?.length || 0;
+  const handleNotificationsClick = () => setShowBadge(false);
 
-  const handleNotificationsClick = () => {
-    setShowBadge(false);
-  };
-
-  // ✅ Close menu when clicking nav item
+  // ✅ Scroll page to top and close menus
   const handleNavClick = () => {
     setMenuOpen(false);
+    setDropdownOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const navLinkClass = ({ isActive }) =>
+    `px-3 py-1.5 rounded text-sm font-medium tracking-wide transition 
+     ${
+       isActive
+         ? "text-white bg-emerald-600"
+         : "text-gray-100 hover:text-white hover:bg-emerald-500/40"
+     }`;
 
   const navItem = (
     <>
       <li>
-        <NavLink to="/" onClick={handleNavClick} className="px-3 py-1 rounded">
+        <NavLink to="/" onClick={handleNavClick} className={navLinkClass}>
           Home
         </NavLink>
       </li>
@@ -67,7 +74,7 @@ const NavBar = () => {
         <NavLink
           to="/addPost"
           onClick={handleNavClick}
-          className="px-3 py-1 rounded"
+          className={navLinkClass}
         >
           Add Post
         </NavLink>
@@ -78,7 +85,7 @@ const NavBar = () => {
             <NavLink
               to="/dashboard/homeDashboard"
               onClick={handleNavClick}
-              className="px-3 py-1 rounded"
+              className={navLinkClass}
             >
               Dashboard
             </NavLink>
@@ -87,7 +94,7 @@ const NavBar = () => {
             <NavLink
               to="/membership"
               onClick={handleNavClick}
-              className="px-3 py-1 rounded"
+              className={navLinkClass}
             >
               Membership
             </NavLink>
@@ -95,11 +102,7 @@ const NavBar = () => {
         </>
       )}
       <li>
-        <NavLink
-          to="/about"
-          onClick={handleNavClick}
-          className="px-3 py-1 rounded"
-        >
+        <NavLink to="/about" onClick={handleNavClick} className={navLinkClass}>
           About
         </NavLink>
       </li>
@@ -107,7 +110,7 @@ const NavBar = () => {
         <NavLink
           to="/services"
           onClick={handleNavClick}
-          className="px-3 py-1 rounded"
+          className={navLinkClass}
         >
           Service
         </NavLink>
@@ -116,26 +119,31 @@ const NavBar = () => {
         <NavLink
           to="/contact"
           onClick={handleNavClick}
-          className="px-3 py-1 rounded"
+          className={navLinkClass}
         >
           Contact
         </NavLink>
       </li>
+      <button
+        onClick={() => setDarkMode(!darkMode)}
+        className="btn border-none shadow shadow-gray-200 btn-outline btn-sm p-2 mr-2"
+      >
+        {darkMode ? "Light" : "Dark"}
+      </button>
     </>
   );
 
   return (
     <div
-      className="navbar bg-base-100 px-7 shadow-sm 
-      fixed top-0 left-0 right-0 z-40 lg:static"
+      className="navbar dark:bg-black fixed top-0 left-0 right-0 z-50 md:px-12 py-2.5 
+      bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-sm"
     >
       {/* Navbar Start */}
       <div className="navbar-start">
-        {/* Hamburger button */}
         <div className="lg:hidden">
           <button
             onClick={() => setMenuOpen(true)}
-            className="btn btn-ghost text-2xl"
+            className="text-2xl text-white"
           >
             ☰
           </button>
@@ -143,36 +151,43 @@ const NavBar = () => {
 
         <Link
           to="/"
-          className="btn btn-ghost text-xl items-center justify-center"
+          onClick={handleNavClick}
+          className="text-2xl pl-4 font-semibold text-white hover:text-gray-200 transition"
         >
-          <span className="text-3xl text-emerald-500">Forum</span>
+          Forum
         </Link>
       </div>
 
-      {/* Navbar Center (desktop menu) */}
+      {/* Navbar Center (desktop) */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navItem}</ul>
+        <ul className="menu menu-horizontal px-2 space-x-2">{navItem}</ul>
       </div>
 
       {/* Navbar End */}
       <div className="navbar-end relative" ref={dropdownRef}>
-        <div className="mx-4 md:mr-14 mr-7 relative">
+        <div className="mx-3 relative">
           <NavLink
             to="/HomeAnnouncements"
             className="relative"
-            onClick={handleNotificationsClick}
+            onClick={() => {
+              handleNotificationsClick();
+              handleNavClick();
+            }}
           >
-            <MdNotifications className="text-2xl text-gray-700" />
+            <MdNotifications className="text-2xl text-white" />
             {showBadge && announcementCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
                 {announcementCount}
               </span>
             )}
           </NavLink>
         </div>
+
         {!user ? (
-          <Link to="/login">
-            <span className="btn btn-primary text-black">Log In</span>
+          <Link to="/login" onClick={handleNavClick}>
+            <span className="btn bg-white text-emerald-700 hover:bg-gray-100 border-none text-sm font-medium px-4 py-1.5">
+              Log In
+            </span>
           </Link>
         ) : (
           <div className="relative">
@@ -180,27 +195,27 @@ const NavBar = () => {
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="w-10 rounded-full">
+              <div className="w-9 rounded-full">
                 <img
                   src={user?.photoURL || "/default-profile.png"}
                   alt="user"
+                  referrerPolicy="no-referrer"
                 />
               </div>
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 h-32 bg-white border rounded-lg shadow-lg z-50">
+              <div className="absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50 text-gray-700 text-sm">
                 <Link
                   to="/dashboard/homeDashboard"
-                  className="block px-4 py-3 text-gray-700 hover:bg-gray-100"
-                  onClick={() => setDropdownOpen(false)}
+                  className="block px-4 py-2 hover:bg-gray-100"
+                  onClick={handleNavClick}
                 >
                   Dashboard
                 </Link>
-
                 <button
                   onClick={handleLogOut}
-                  className="w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100"
+                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
                 >
                   Logout
                 </button>
@@ -213,21 +228,21 @@ const NavBar = () => {
       {/* Mobile Side Menu */}
       {menuOpen && (
         <div className="fixed inset-0 z-50 flex">
-          {/* Overlay */}
           <div
             className="fixed inset-0 bg-black bg-opacity-40"
             onClick={() => setMenuOpen(false)}
           ></div>
 
-          {/* Sidebar */}
-          <div className="relative bg-white w-[70%] h-full shadow-lg p-5">
+          <div className="relative bg-gradient-to-r from-teal-700 to-teal-700 w-[70%] h-full shadow-lg p-5">
             <button
               onClick={() => setMenuOpen(false)}
               className="absolute top-3 right-3 text-2xl"
             >
               ✕
             </button>
-            <ul className="menu space-y-4 mt-10">{navItem}</ul>
+            <ul className="menu space-y-3 mt-10 text-gray-700 text-base font-medium">
+              {navItem}
+            </ul>
           </div>
         </div>
       )}

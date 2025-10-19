@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   FaUsers,
   FaChalkboardTeacher,
@@ -6,6 +6,7 @@ import {
   FaLaptopCode,
 } from "react-icons/fa";
 import Footer from "./Footer";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const aboutPoints = [
   {
@@ -35,21 +36,31 @@ const aboutPoints = [
 ];
 
 const About = () => {
+  const { darkMode } = useContext(AuthContext);
   return (
-    <section className="py-16 bg-white">
+    <section
+      className={`pt-10 ${
+        darkMode
+          ? "bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg text-white"
+          : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+      }`}
+    >
       <div className="container mx-auto px-4 max-w-6xl">
         <h2 className="text-3xl font-bold text-center mb-12">
           About Our Forum
         </h2>
 
-        <p className="text-gray-700 mb-8 text-lg">
+        <p className=" mb-8 text-lg">
           Welcome to our Forum website, a hub where education, business, health,
           and technology enthusiasts come together to share knowledge, ask
           questions, and grow collectively. Our goal is to provide a platform
           that encourages learning, networking, and community engagement.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div
+          data-aos="zoom-in"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+        >
           {aboutPoints.map((point, idx) => (
             <div
               key={idx}
@@ -62,7 +73,10 @@ const About = () => {
           ))}
         </div>
 
-        <div className="bg-blue-50 p-8 rounded-xl shadow-inner">
+        <div
+          data-aos="zoom-in"
+          className="bg-blue-50 p-8 rounded-xl shadow-inner"
+        >
           <h3 className="text-2xl font-bold mb-4">Why Join Us?</h3>
           <ul className="list-disc list-inside text-gray-700 space-y-2">
             <li>
@@ -84,11 +98,11 @@ const About = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-gray-700 text-lg mb-2">
+          <p className="text-gray-50 text-lg mb-2">
             Our forum is designed to make learning and networking easy,
             interactive, and fun.
           </p>
-          <p className="text-gray-700 text-lg">
+          <p className="text-gray-50 text-lg">
             Join today, post your thoughts, ask questions, and be part of a
             growing community.
           </p>

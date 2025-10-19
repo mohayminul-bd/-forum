@@ -56,7 +56,7 @@ const PostsList = () => {
             onClick={() => setViewMode("new")}
             className={`px-4 py-2 rounded-lg font-medium transition ${
               viewMode === "new"
-                ? "bg-blue-600 text-white shadow-md"
+                ? "bg-emerald-500 text-white shadow-md"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
             }`}
           >
@@ -66,7 +66,7 @@ const PostsList = () => {
             onClick={() => setViewMode("popular")}
             className={`px-4 py-2 rounded-lg font-medium transition ${
               viewMode === "popular"
-                ? "bg-blue-600 text-white shadow-md"
+                ? "bg-emerald-500 text-white shadow-md"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
             }`}
           >
