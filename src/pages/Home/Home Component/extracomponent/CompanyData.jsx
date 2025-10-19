@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {
@@ -9,6 +9,7 @@ import {
   FiUsers,
   FiCpu,
 } from "react-icons/fi";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const cards = [
   {
@@ -56,6 +57,7 @@ const cards = [
 ];
 
 const CompanyData = () => {
+  const { darkMode } = useContext(AuthContext);
   useEffect(() => {
     AOS.init({
       duration: 700,
@@ -66,12 +68,10 @@ const CompanyData = () => {
 
   return (
     <section className="py-12 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h3 className="text-3xl font-extrabold text-gray-900">
-            Project Overview
-          </h3>
-          <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
+          <h3 className="text-3xl font-extrabold ">Project Overview</h3>
+          <p className="mt-2 text-gray-300 max-w-2xl mx-auto">
             This project or website focuses on Health, Technology, Business, and
             Education. Explore how we ensure quality, reliability, performance,
             and services tailored to these domains.
@@ -86,7 +86,13 @@ const CompanyData = () => {
               data-aos-delay={idx * 80}
               className="relative transform hover:-translate-y-2 transition-all duration-300"
             >
-              <div className="overflow-hidden rounded-2xl shadow-lg p-6 bg-white border border-gray-100">
+              <div
+                className={`overflow-hidden rounded-2xl shadow-lg p-6  border border-gray-100 ${
+                  darkMode
+                    ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+                    : "bg-base-100 text-black"
+                }`}
+              >
                 <div className="flex items-start gap-4">
                   <div
                     className={`flex-shrink-0 rounded-lg p-3 bg-gradient-to-br ${c.accent} text-white shadow-md`}
@@ -94,10 +100,8 @@ const CompanyData = () => {
                     {c.icon}
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900">
-                      {c.title}
-                    </h4>
-                    <p className="mt-2 text-sm text-gray-600">{c.desc}</p>
+                    <h4 className="text-lg font-semibold ">{c.title}</h4>
+                    <p className="mt-2  text-sm ">{c.desc}</p>
                   </div>
                 </div>
 
@@ -113,7 +117,7 @@ const CompanyData = () => {
                   </span>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between text-sm text-gray-500">
+                <div className="mt-6 flex items-center justify-between text-sm ">
                   <span>Deliverable</span>
                   <span className="font-medium text-gray-800">v1.0</span>
                 </div>

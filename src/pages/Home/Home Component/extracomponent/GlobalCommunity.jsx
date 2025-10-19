@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { Users, Smile, Cpu, LayoutGrid } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const stats = [
   {
@@ -33,6 +34,8 @@ const stats = [
 ];
 
 const GlobalCommunity = () => {
+  const { darkMode } = useContext(AuthContext);
+
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
 
   useEffect(() => {
@@ -40,7 +43,7 @@ const GlobalCommunity = () => {
   }, []);
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-12" ref={ref}>
+    <section className="max-w-6xl  mx-auto  " ref={ref}>
       <div className="text-center mb-10" data-aos="fade-up">
         <h2 className="text-3xl md:text-4xl font-extrabold">
           Our Global Community
@@ -56,7 +59,11 @@ const GlobalCommunity = () => {
           <div
             key={stat.id}
             data-aos="flip-up"
-            className="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-lg p-6 flex flex-col items-center text-center"
+            className={`dark:bg-slate-800 border  border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-lg p-6 flex flex-col items-center text-center ${
+              darkMode
+                ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+                : "bg-base-100"
+            }`}
           >
             <div className="mb-4">{stat.icon}</div>
             <div className="text-3xl md:text-4xl font-bold text-indigo-600">

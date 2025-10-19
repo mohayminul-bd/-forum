@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Footer from "./Footer";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const Contact = () => {
+  const { darkMode } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
@@ -17,7 +19,13 @@ const Contact = () => {
   };
 
   return (
-    <section className="pt-10 bg-white">
+    <section
+      className={`pt-10 ${
+        darkMode
+          ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-md rounded-lg text-white"
+          : "bg-base-100 text-black"
+      }`}
+    >
       <div className="container mx-auto px-4 max-w-xl">
         <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
 
@@ -52,10 +60,10 @@ const Contact = () => {
         {/* Contact Form */}
         <form
           onSubmit={handleSubmit}
-          className="bg-gray-50 p-6 rounded-xl shadow-md space-y-4"
+          className=" p-6 rounded-xl shadow-md space-y-4"
         >
           <div>
-            <label className="block text-gray-700 mb-1">Name</label>
+            <label className="block  mb-1">Name</label>
             <input
               type="text"
               name="name"
@@ -64,7 +72,7 @@ const Contact = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 mb-1">Email</label>
+            <label className="block  mb-1">Email</label>
             <input
               type="email"
               name="email"
@@ -73,7 +81,7 @@ const Contact = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 mb-1">Message</label>
+            <label className="block  mb-1">Message</label>
             <textarea
               name="message"
               rows="4"

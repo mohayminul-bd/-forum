@@ -124,18 +124,12 @@ const NavBar = () => {
           Contact
         </NavLink>
       </li>
-      <button
-        onClick={() => setDarkMode(!darkMode)}
-        className="btn border-none shadow shadow-gray-200 btn-outline btn-sm p-2 mr-2"
-      >
-        {darkMode ? "Light" : "Dark"}
-      </button>
     </>
   );
 
   return (
     <div
-      className="navbar dark:bg-black fixed top-0 left-0 right-0 z-50 md:px-12 py-2.5 
+      className="navbar w-full  fixed top-0 left-0 right-0 z-50 md:px-12 py-2.5 
       bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-sm"
     >
       {/* Navbar Start */}
@@ -165,6 +159,12 @@ const NavBar = () => {
 
       {/* Navbar End */}
       <div className="navbar-end relative" ref={dropdownRef}>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="btn border-none shadow shadow-gray-200 btn-outline btn-sm p-2 mr-2"
+        >
+          {darkMode ? "Light" : "Dark"}
+        </button>
         <div className="mx-3 relative">
           <NavLink
             to="/HomeAnnouncements"
@@ -227,7 +227,7 @@ const NavBar = () => {
 
       {/* Mobile Side Menu */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 flex">
+        <div className="fixed  inset-0  z-50 flex">
           <div
             className="fixed inset-0 bg-black bg-opacity-40"
             onClick={() => setMenuOpen(false)}

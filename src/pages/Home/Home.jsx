@@ -17,7 +17,7 @@ const Home = () => {
     <div>
       <Banner></Banner>
       <div
-        className={`md:px-20 mt-[-88px] mx-auto ${
+        className={`md:px-20 pb-4 px-4 mt-[-88px] mx-auto ${
           darkMode
             ? "bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg text-white"
             : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"

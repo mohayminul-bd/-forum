@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const Newsletter = () => {
+  const { darkMode } = useContext(AuthContext);
   return (
     <section
       data-aos="flip-left"
       data-aos-easing="ease-out-cubic"
       data-aos-duration="2000"
-      className=" bg-gradient-to-r from-teal-300 to-emerald-600 text-white   py-8 mb-4 rounded-2xl shadow-md text-center"
+      className={` text-white md:px-12  py-8 pb-5 rounded-2xl shadow-md text-center ${
+        darkMode
+          ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+          : "bg-gradient-to-r from-teal-300 to-emerald-600"
+      }`}
     >
       <h2 className="text-3xl font-bold mb-4">
         📩 Stay Updated with Our Forum

@@ -109,10 +109,10 @@ const PostDetails = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm">
+    <div className="max-w-4xl mx-auto p-8  rounded-lg shadow-sm">
       {/* Post */}
       <h1 className="text-2xl font-bold mb-2">{post.title}</h1>
-      <p className="text-gray-700 mb-6">{post.description}</p>
+      <p className=" mb-6">{post.description}</p>
 
       {/* Vote */}
       <div className="flex gap-6 mb-6">
@@ -151,7 +151,7 @@ const PostDetails = () => {
             {post.comments.map((c) => (
               <li
                 key={c._id}
-                className="p-4 bg-gray-50 rounded flex justify-between items-start"
+                className="p-4  shadow-lg rounded flex justify-between items-start"
               >
                 <div>
                   <p className="font-semibold">{c.userName}</p>

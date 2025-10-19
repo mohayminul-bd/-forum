@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Cpu, LayoutGrid, ShieldCheck, Zap, Users, Smile } from "lucide-react";
 import "aos/dist/aos.css";
+import { AuthContext } from "../../../context/AuthContext";
 
 const Platform1 = () => {
+  const { darkMode } = useContext(AuthContext);
+
   return (
-    <section className="max-w-6xl mx-auto px-6 py-12">
+    <section className="max-w-6xl mx-auto ">
       {/* Section Heading */}
       <div className="text-center mb-8">
         <h2 className="text-3xl md:text-4xl font-extrabold leading-tight">
@@ -21,7 +24,11 @@ const Platform1 = () => {
         {/* Card 1 */}
         <div
           data-aos="flip-up"
-          className="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col"
+          className={`rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+              : "bg-base-100 text-black"
+          }`}
         >
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
@@ -34,7 +41,7 @@ const Platform1 = () => {
               </p>
             </div>
           </div>
-          <p className="mt-4 text-sm flex-1">
+          <p className="mt-4 text-md flex-1">
             Leveraging cutting-edge tech solutions to transform businesses and
             education.
           </p>
@@ -43,7 +50,11 @@ const Platform1 = () => {
         {/* Card 2 */}
         <div
           data-aos="flip-up"
-          className="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col"
+          className={`rounded-2xl shadow-lg hover:shadow-lg p-5 flex flex-col ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+              : "bg-base-100 text-black"
+          }`}
         >
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
@@ -56,7 +67,7 @@ const Platform1 = () => {
               </p>
             </div>
           </div>
-          <p className="mt-4 text-sm flex-1">
+          <p className="mt-4 text-md flex-1">
             Accessible health solutions and wellness programs to improve lives.
           </p>
         </div>
@@ -64,7 +75,11 @@ const Platform1 = () => {
         {/* Card 3 */}
         <div
           data-aos="flip-up"
-          className="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col"
+          className={`rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+              : "bg-base-100 text-black"
+          }`}
         >
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
@@ -77,7 +92,7 @@ const Platform1 = () => {
               </p>
             </div>
           </div>
-          <p className="mt-4 text-sm flex-1">
+          <p className="mt-4 text-md flex-1">
             Empowering students and professionals with modern educational tools.
           </p>
         </div>
@@ -85,7 +100,11 @@ const Platform1 = () => {
         {/* Card 4 */}
         <div
           data-aos="flip-up"
-          className="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col"
+          className={`rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+              : "bg-base-100 text-black"
+          }`}
         >
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
@@ -98,7 +117,7 @@ const Platform1 = () => {
               </p>
             </div>
           </div>
-          <p className="mt-4 text-sm flex-1">
+          <p className="mt-4 text-md flex-1">
             Helping businesses scale efficiently with reliable solutions.
           </p>
         </div>
@@ -106,7 +125,11 @@ const Platform1 = () => {
         {/* Card 5 */}
         <div
           data-aos="flip-up"
-          className="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col"
+          className={`rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+              : "bg-base-100 text-black"
+          }`}
         >
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
@@ -119,7 +142,7 @@ const Platform1 = () => {
               </p>
             </div>
           </div>
-          <p className="mt-4 text-sm flex-1">
+          <p className="mt-4 text-md flex-1">
             Delivering fast, reliable results across all sectors we serve.
           </p>
         </div>
@@ -127,7 +150,11 @@ const Platform1 = () => {
         {/* Card 6 */}
         <div
           data-aos="flip-up"
-          className="bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col"
+          className={`rounded-2xl shadow-sm hover:shadow-lg p-5 flex flex-col ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+              : "bg-base-100 text-black"
+          }`}
         >
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-900/30">
@@ -140,7 +167,7 @@ const Platform1 = () => {
               </p>
             </div>
           </div>
-          <p className="mt-4 text-sm flex-1">
+          <p className="mt-4 text-md flex-1">
             Expert support to ensure growth and smooth adoption of our platform.
           </p>
         </div>

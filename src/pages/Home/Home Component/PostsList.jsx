@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import PostCard from "./PostCard";
 import axios from "axios";
+import { AuthContext } from "../../../context/AuthContext";
 
 const PostsList = () => {
   const [viewMode, setViewMode] = useState("new"); // "new" or "popular"
@@ -44,7 +45,7 @@ const PostsList = () => {
         );
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="py-4 max-w-6xl mx-auto">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold flex items-center gap-2">
           🔥 Forum Posts ({posts.length})
