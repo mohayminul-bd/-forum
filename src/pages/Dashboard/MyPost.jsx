@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaArrowAltCircleUp, FaArrowCircleDown } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router";
+import { AuthContext } from "../../context/AuthContext";
 
 const MyPost = () => {
+  const { darkMode } = useContext(AuthContext);
   const { user } = useAuth(); // Logged-in user
   const axiosSecure = useAxiosSecure();
 
@@ -66,7 +68,11 @@ const MyPost = () => {
       {posts.map((post) => (
         <div
           key={post._id}
-          className="bg-white md:w-150 shadow-md rounded-lg overflow-hidden border border-gray-200"
+          className={` p-6 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-2  ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+              : "bg-base-100 text-gray-700"
+          }`}
         >
           {/* Post Header */}
           <div className="flex items-center gap-4 p-4">
@@ -76,7 +82,7 @@ const MyPost = () => {
               className="w-12 h-12 rounded-full border"
             />
             <div className="flex-1">
-              <p className="font-semibold text-gray-800">{post.authorName}</p>
+              <p className="font-semibold ">{post.authorName}</p>
               <span className="text-gray-400 text-sm">
                 Date: {new Date(post.createdAt).toLocaleString()}
               </span>
@@ -86,7 +92,7 @@ const MyPost = () => {
           {/* Post Body */}
           <div className="px-4 pb-4">
             <h3 className="font-bold text-lg mb-2">{post.title}</h3>
-            <p className="text-gray-700 mb-2">{post.description}</p>
+            <p className=" mb-2">{post.description}</p>
             <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
               {post.tag}
             </span>
@@ -100,10 +106,10 @@ const MyPost = () => {
           {/* Post Footer */}
           <div className="flex items-center justify-between px-4 pb-4">
             <div className="flex items-center gap-4">
-              <button className="flex items-center gap-1 text-gray-600 hover:text-blue-600">
+              <button className="flex items-center gap-1  hover:text-blue-600">
                 <FaArrowAltCircleUp /> {post.upVote || 0}
               </button>
-              <button className="flex items-center gap-1 text-gray-600 hover:text-red-600">
+              <button className="flex items-center gap-1  hover:text-red-600">
                 <FaArrowCircleDown /> {post.downVote || 0}
               </button>
             </div>

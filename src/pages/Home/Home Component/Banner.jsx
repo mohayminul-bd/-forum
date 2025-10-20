@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PostCard from "./PostCard";
 import { NavLink } from "react-router"; // ✅ fixed import route
+import { AuthContext } from "../../../context/AuthContext";
 
 const Banner = () => {
+  const { darkMode } = useContext(AuthContext);
   const images = [
     "https://i.ibb.co/Qv37xmj4/istockphoto-1987788771-612x612.jpg",
     "https://i.ibb.co/3ykygVhq/one-text-to-many.png",
@@ -85,10 +87,10 @@ const Banner = () => {
 
         {/* ✅ Hero content */}
         <div className="relative z-10 flex flex-col justify-center items-center h-full text-center text-white px-4">
-          <h1 className="mb-5 text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg">
+          <h1 className="mb-5 font-poppins text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg">
             Forum Message
           </h1>
-          <p className="mb-5 text-base md:text-lg max-w-xl drop-shadow-sm">
+          <p className="mb-5 font-poppins text-base md:text-lg max-w-xl drop-shadow-sm">
             Browse posts by tags or add your own posts to get started.
           </p>
 
@@ -99,7 +101,11 @@ const Banner = () => {
               placeholder="Search by tag..."
               value={searchTag}
               onChange={(e) => setSearchTag(e.target.value)}
-              className="input input-bordered w-full text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className={`input input-bordered w-full text-lg rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500  ${
+                darkMode
+                  ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+                  : "bg-base-100 text-black"
+              }`}
             />
             <button
               onClick={() => handleSearch()}

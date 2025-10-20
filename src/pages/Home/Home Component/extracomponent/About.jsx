@@ -64,21 +64,29 @@ const About = () => {
           {aboutPoints.map((point, idx) => (
             <div
               key={idx}
-              className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-lg transition hover:-translate-y-2 text-center"
+              className={` p-6 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-2  ${
+                darkMode
+                  ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+                  : "bg-base-100 text-gray-700"
+              }`}
             >
               {point.icon}
               <h3 className="text-xl font-semibold mb-3">{point.title}</h3>
-              <p className="text-gray-600">{point.description}</p>
+              <p>{point.description}</p>
             </div>
           ))}
         </div>
 
         <div
           data-aos="zoom-in"
-          className="bg-blue-50 p-8 rounded-xl shadow-inner"
+          className={` p-6 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-2  ${
+            darkMode
+              ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+              : "bg-base-100 text-gray-700"
+          }`}
         >
           <h3 className="text-2xl font-bold mb-4">Why Join Us?</h3>
-          <ul className="list-disc list-inside text-gray-700 space-y-2">
+          <ul className="list-disc list-inside  space-y-2">
             <li>
               Access to a wide range of educational and professional content.
             </li>

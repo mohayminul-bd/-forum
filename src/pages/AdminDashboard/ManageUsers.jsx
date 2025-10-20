@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
 
 const ManageUsers = () => {
+  const { darkMode } = useContext(AuthContext);
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -62,7 +65,13 @@ const ManageUsers = () => {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">Manage Users</h2>
-      <table className="table w-full bg-white border">
+      <table
+        className={`table w-full  border ${
+          darkMode
+            ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+            : "bg-base-100 text-gray-700"
+        }`}
+      >
         <thead>
           <tr>
             <th>Name</th>

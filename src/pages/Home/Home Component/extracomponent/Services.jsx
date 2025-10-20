@@ -75,13 +75,17 @@ const Service = () => {
             <div
               data-aos="zoom-in-up"
               key={idx}
-              className="bg-white p-6 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-2"
+              className={` p-6 rounded-xl shadow hover:shadow-xl transition hover:-translate-y-2  ${
+                darkMode
+                  ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+                  : "bg-base-100 text-gray-700"
+              }`}
             >
               {service.icon}
               <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <h4 className="text-gray-500 mb-3">{service.subtitle}</h4>
-              <p className="text-gray-600 mb-4">{service.description}</p>
-              <ul className="list-disc list-inside text-gray-600 text-sm space-y-1">
+              <h4 className=" mb-3">{service.subtitle}</h4>
+              <p className=" mb-4">{service.description}</p>
+              <ul className="list-disc list-inside  text-sm space-y-1">
                 {service.points.map((point, index) => (
                   <li key={index}>{point}</li>
                 ))}

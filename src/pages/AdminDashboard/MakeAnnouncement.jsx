@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthContext";
 
 const MakeAnnouncement = () => {
+  const { darkMode } = useContext(AuthContext);
   const { user } = useAuth(); // firebase login user
   const axios = useAxiosSecure();
   const [role, setRole] = useState(null);
@@ -88,7 +90,11 @@ const MakeAnnouncement = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6 bg-white p-6 rounded-lg shadow-md"
+        className={`space-y-6  p-6 rounded-lg shadow-md ${
+          darkMode
+            ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+            : "bg-base-100 text-gray-700"
+        }`}
       >
         <div>
           <label className="block font-medium mb-1">Title</label>

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
 
 const ReportedCommentsAdmin = () => {
+  const { darkMode } = useContext(AuthContext);
   const queryClient = useQueryClient();
 
   // Fetch reported comments
@@ -60,7 +62,13 @@ const ReportedCommentsAdmin = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-white rounded shadow">
+    <div
+      className={`max-w-6xl mx-auto p-6  rounded shadow ${
+        darkMode
+          ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+          : "bg-base-100 text-gray-700"
+      }`}
+    >
       <h2 className="text-xl font-bold mb-4">Reported Comments</h2>
       {uniqueReports.length === 0 ? (
         <p>No reported comments.</p>

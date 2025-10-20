@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import { AuthContext } from "../../context/AuthContext";
 // import useAuth from "../hooks/useAuth"; // Firebase auth hook
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
 
 const AdminProfile = () => {
+  const { darkMode } = useContext(AuthContext);
   const [tagName, setTagName] = useState("");
   const { user } = useAuth(); // Firebase user
 
@@ -61,13 +63,20 @@ const AdminProfile = () => {
   const admin = stats.admin || {};
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow-md">
+    <div
+      className={`p-6 rounded-xl shadow-md ${
+        darkMode
+          ? " bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg"
+          : "bg-base-100 text-gray-700"
+      }`}
+    >
       <h2 className="text-2xl font-bold mb-4">Admin Profile</h2>
 
       {/* Admin Info */}
       <div className="flex items-center gap-4 mb-6">
         <img
           src={admin.image || "https://via.placeholder.com/80?text=Admin"}
+          referrerPolicy="no-referrer"
           alt={admin.name || "Admin"}
           className="w-20 h-20 rounded-full border"
         />
