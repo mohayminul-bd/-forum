@@ -26,7 +26,7 @@ const GoogleLogin = () => {
           "https://fourm-server.vercel.app/users",
           userInfo
         );
-        console.log(" user update info", Res.data);
+
         navigate(from);
       })
       .catch((error) => {

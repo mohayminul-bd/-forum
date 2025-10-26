@@ -6,7 +6,7 @@ import DashboardText from "./homeDashboardComponent/DashboardText";
 
 const HomeDashboard = () => {
   return (
-    <div>
+    <div className="">
       <div>
         <UserCard></UserCard>
       </div>

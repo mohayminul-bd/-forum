@@ -22,9 +22,13 @@ const Login = () => {
   return (
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
       <div className="card-body">
-        <NavLink to="/">
+        <div>
           <h2 className="text-2xl">login</h2>
-        </NavLink>
+          <h3 className="text-blue-500">
+            Admin Email: sourav024@gmail.com <br /> Password: 123456
+          </h3>
+        </div>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset className="fieldset">
             <label className="label">Email</label>

@@ -37,7 +37,7 @@ const UserCard = () => {
   }, [user?.email]);
 
   return (
-    <div className="p-4 sm:p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
+    <div className="p-6 md:px-9 max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
       {/* User Info */}
       <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
         <img

@@ -86,7 +86,7 @@ const DashboardLayout = () => {
             </div>
           </div>
 
-          <div className="p-6 w-full lg:w-3/4 mx-auto">
+          <div className="p-6 w-full  mx-auto">
             <Outlet />
           </div>
         </div>

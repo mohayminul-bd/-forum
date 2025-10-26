@@ -3,7 +3,7 @@ import { FaTrophy, FaChartBar } from "react-icons/fa";
 
 const DashboardText = () => {
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-white rounded-lg shadow-lg space-y-6">
+    <div className="p-6 md:px-9 md:mx-9 mx-auto bg-white rounded-lg shadow-lg space-y-6">
       {/* Achievements Section */}
       <div>
         <div className="flex items-center gap-2 mb-3">

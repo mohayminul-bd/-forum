@@ -79,17 +79,9 @@ const NavBar = () => {
           Add Post
         </NavLink>
       </li>
+
       {user && (
         <>
-          <li>
-            <NavLink
-              to="/dashboard/homeDashboard"
-              onClick={handleNavClick}
-              className={navLinkClass}
-            >
-              Dashboard
-            </NavLink>
-          </li>
           <li>
             <NavLink
               to="/membership"
@@ -205,7 +197,7 @@ const NavBar = () => {
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50 text-gray-700 text-sm">
+              <div className="absolute h-40 right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg z-50 text-gray-700 text-md">
                 <Link
                   to="/dashboard/homeDashboard"
                   className="block px-4 py-2 hover:bg-gray-100"

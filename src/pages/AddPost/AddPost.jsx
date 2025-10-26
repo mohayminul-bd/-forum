@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import { useNavigate } from "react-router";
@@ -8,7 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import { AuthContext } from "../../context/AuthContext";
 
 const AddPost = () => {
-  // const { darkMode } = useContext(AuthContext);
+  const { darkMode } = useContext(AuthContext);
   const { user } = useAuth();
   const navigate = useNavigate();
   const axios = useAxiosSecure();
@@ -67,12 +67,18 @@ const AddPost = () => {
   };
 
   return (
-    <div className={` md:px-40 py-10 px-6 `}>
+    <div
+      className={` md:px-40 py-10 px-6 ${
+        darkMode
+          ? "bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 shadow-lg rounded-lg text-white"
+          : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+      }`}
+    >
       <h1 className="text-3xl font-bold text-center mb-6">➕ Add Post</h1>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6  shadow-lg p-6 rounded-lg"
+        className="space-y-6  shadow-lg p-6 rounded-lg  "
       >
         {/* Author info */}
         <div className="flex items-center gap-4">
@@ -83,7 +89,7 @@ const AddPost = () => {
           />
           <div>
             <p className="font-semibold">{user?.displayName || "Anonymous"}</p>
-            <p className="text-gray-500 text-sm">{user?.email}</p>
+            <p className="text-gray-400 text-sm">{user?.email}</p>
           </div>
         </div>
 
@@ -92,7 +98,9 @@ const AddPost = () => {
           <label className="block  font-medium mb-1">Post Title</label>
           <input
             {...register("title", { required: "Title is required" })}
-            className="input input-bordered w-full"
+            className={`input input-bordered w-full ${
+              darkMode ? "" : " text-gray-800"
+            }`}
             placeholder="Enter post title"
           />
           {errors.title && (
@@ -107,7 +115,9 @@ const AddPost = () => {
             {...register("description", {
               required: "Description is required",
             })}
-            className="textarea textarea-bordered w-full"
+            className={`textarea textarea-bordered w-full ${
+              darkMode ? "" : "text-gray-800"
+            }`}
             placeholder="Write something..."
             rows={4}
           />
@@ -131,6 +141,7 @@ const AddPost = () => {
                 options={tagOptions}
                 placeholder={isLoading ? "Loading tags..." : "Select a tag"}
                 isLoading={isLoading}
+                className=" text-black"
               />
             )}
           />

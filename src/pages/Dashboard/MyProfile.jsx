@@ -72,7 +72,7 @@ const MyProfile = () => {
 
           {/* ✅ Badge based on isMember */}
           <div className="mt-2 sm:mt-3 flex justify-center sm:justify-start space-x-3">
-            {profile.isMember ? <GoldBadge /> : <BronzeBadge />}
+            {profile?.isMember ? <GoldBadge /> : <BronzeBadge />}
           </div>
         </div>
       </div>
