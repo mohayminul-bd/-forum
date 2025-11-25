@@ -35,7 +35,7 @@ const PostDetails = () => {
       });
       queryClient.invalidateQueries(["post", id]);
     } catch (err) {
-      alert("Failed to vote", err);
+      alert("All ready vot done", err);
     }
   };
 
@@ -118,13 +118,13 @@ const PostDetails = () => {
       <div className="flex gap-6 mb-6">
         <button
           onClick={() => handleVote("up")}
-          className="flex gap-2 items-center text-green-600"
+          className="flex gap-2 items-center cursor-pointer text-green-600"
         >
           <FaArrowUp /> {post.upVote || 0}
         </button>
         <button
           onClick={() => handleVote("down")}
-          className="flex gap-2 items-center text-red-600"
+          className="flex gap-2 items-center cursor-pointer text-red-600"
         >
           <FaArrowDown /> {post.downVote || 0}
         </button>
