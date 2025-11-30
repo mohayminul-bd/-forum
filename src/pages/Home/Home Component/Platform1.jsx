@@ -7,13 +7,13 @@ const Platform1 = () => {
   const { darkMode } = useContext(AuthContext);
 
   return (
-    <section className="max-w-6xl mx-auto ">
+    <section className="max-w-6xl mx-auto md:pt-12">
       {/* Section Heading */}
-      <div className="text-center mb-8">
+      <div className=" mb-8">
         <h2 className="text-3xl md:text-4xl font-extrabold leading-tight">
           Why Choose Our Platform
         </h2>
-        <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
+        <p className="mt-3 text-muted-foreground max-w-2xl ">
           We provide innovative solutions across Technology, Health, Education,
           and Business sectors.
         </p>
